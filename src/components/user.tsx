@@ -116,9 +116,7 @@ const User = ({ url }: any) => {
                   </div>
                 </div>
               </div>
-              {/* <button className="bg-rgb(246, 248, 250)-500 hover:bg-grey text-rgb(36, 41, 47) font-semibold py-2 px-4 border border-rgba(31, 35, 40, 0.15) rounded-md">
-                Follow
-              </button> */}
+             
             </div>
           </div>
         </div>

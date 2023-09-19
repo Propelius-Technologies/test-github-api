@@ -112,11 +112,14 @@ const Home = () => {
                     return (
                       <div
                         key={data.id}
-                        // style={{ minWidth: "48%", width: "100%" }}
                         className=" lg:w-[48%] w-full  border px-4 py-4 mb-4  rounded text-sm"
                       >
                         <div className="flex text-blue-500  justify-between font-semibold">
-                          <a href="#" className="no-underline truncate">
+                          <a
+                            href={data?.html_url}
+                            target="_blank"
+                            className="no-underline truncate"
+                          >
                             {data.name}
                           </a>
                           <div
@@ -127,7 +130,6 @@ const Home = () => {
                           </div>
                         </div>
                         <div className="flex  items-center  gap-2 text-sm mt-6">
-                          {/* {generateLanguageBadge(data.language)} */}
                           <span
                             style={{
                               backgroundColor: `${getColorByLanguage(

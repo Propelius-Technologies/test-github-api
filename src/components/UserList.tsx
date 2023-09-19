@@ -3,18 +3,17 @@ import React, { useEffect } from "react";
 import User from "./user";
 import Pagination from "./Pagination";
 
-const UserList = ({ value, setDataCount }: any) => {
+const UserList = ({ value, setDataCount, page, setPage }: any) => {
   const {
-    data: userData = {},
+    data: userData,
     error,
     isLoading,
     isFetching,
     refetch,
-  } = useGetUsersQuery({ user: value });
+  } = useGetUsersQuery({ user: value, page: page });
   useEffect(() => {
     setDataCount(userData?.total_count);
   }, [userData]);
-
   return (
     <>
       {isLoading ? (
@@ -43,7 +42,7 @@ const UserList = ({ value, setDataCount }: any) => {
 
           <span className="sr-only">Loading...</span>
         </div>
-      ) : userData.length === 0 ? (
+      ) : !userData ? (
         <div className="text-black h-full w-full flex justify-center items-center">
           No Data{" "}
         </div>
@@ -53,7 +52,14 @@ const UserList = ({ value, setDataCount }: any) => {
             return <User key={user.id} {...user} />;
           })}
 
-          {/* <Pagination total={userData?.total_count || 0} /> */}
+          {userData?.total_count > 10 && (
+            <Pagination
+              setPage={setPage}
+              page={page}
+              Loading={isLoading || isFetching}
+              total={userData?.total_count || 0}
+            />
+          )}
         </>
       )}
     </>

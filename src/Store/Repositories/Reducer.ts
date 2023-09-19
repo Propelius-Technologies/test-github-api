@@ -4,22 +4,20 @@ export const repositoryApi = createApi({
   baseQuery: fetchBaseQuery({
     baseUrl: "https://api.github.com/",
     headers: {
-      Authorization:
-        "Bearer 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",
+      Authorization: `Bearer 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`,
     },
-    // prepareHeaders: (headers) => {
-    //   headers.set("Access-Control-Allow-Origin", "*");
-    //   // headers.set('Access-Control-Allow-Methods', 'GET') //
-    //   // headers.set('Access-Control-Allow-Headers', '*') //
-    //   return headers;
-    // },
   }),
   tagTypes: ["Repository"],
   endpoints: (builder) => ({
     getRepositories: builder.query({
-      query: ({ repository }) => ({
+      query: ({ repository, page }) => ({
         url: `/search/repositories?q=${repository}`,
         method: "GET",
+
+        params: {
+          page: page || 0, // Page number
+          per_page: 10, // Number of results per page (max: 100)
+        },
       }),
       providesTags: ["Repository"],
     }),

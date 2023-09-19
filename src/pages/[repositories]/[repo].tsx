@@ -17,43 +17,6 @@ const RepositoryDetails = () => {
   });
   return (
     <ContentWrapper className={"text-black"}>
-      {/* <div className="flex justify-center h-screen bg-white">
-        <div className="m-5 md:container ">
-          <div className="flex mb-3 w-auto">
-            <div className="flex-shrink-0 w-8 h-8 mr-3 items-center border border-gray-400 rounded-md">
-              <Image
-                className="w-full h-full"
-                src={reposData?.owner.avatar_url}
-                alt="Alternate text"
-                width={400}
-                height={400}
-              />
-            </div>
-            <p className="text-base md:text-lg lg:text-lg mb-2 whitespace-normal overflow-hidden">
-              {reposData?.name}
-            </p>
-            <p className="border-grey-500 rounded-full py-2 px-4">Public</p>
-          </div>
-          <div className="max-w-lg shadow-lg">
-            <div className="divide-y divide-gray-400rounded  ">
-              <div className="flex items-center py-3">
-                <Image
-                  src={menu}
-                  alt="menu icon"
-                  style={{ height: "20px", width: "auto", marginRight: "8px" }}
-                />
-                <p>README.md</p>
-              </div>
-              <div className="text-center py-2">{reposData?.description}</div>
-              <div className="text-center py-2">{reposData?.owner.login}</div>
-              <div className="text-center py-2">
-                {reposData?.stargazers_count}
-              </div>
-              <Link href={reposData?.clone_url}>{reposData?.clone_url}</Link>
-            </div>
-          </div>
-        </div>
-      </div> */}
       <div className="bg-gray-100 min-h-screen p-4">
         <div className="max-w-3xl mx-auto">
           <h1 className="text-2xl font-semibold mb-4">Repository Detail</h1>
@@ -66,14 +29,15 @@ const RepositoryDetails = () => {
                 height={150}
               />{" "}
               <div className="font-medium">
-                <h2 className="text-lg font-semibold">{reposData.name}</h2>
-                <p className="text-gray-600">{reposData.description}</p>
+                <h2 className="text-lg font-semibold">{reposData?.name}</h2>
+                <p className="text-gray-600">{reposData?.description}</p>
                 <p className="text-black ">
                   Owner:{" "}
-                  <span className="text-gray-600">{reposData.owner.login}</span>
+                  <span className="text-gray-600">
+                    {reposData?.owner?.login}
+                  </span>
                 </p>
                 <p className="text-black flex gap-2 flex-row">
-                  {/* Star Count:{" "} */}
                   <svg
                     viewBox="0 0 24 24"
                     fill="none"
@@ -99,12 +63,12 @@ const RepositoryDetails = () => {
                     </g>
                   </svg>
                   <span className="text-gray-600">
-                    {reposData.stargazers_count}
+                    {reposData?.stargazers_count}
                   </span>
                 </p>
 
                 <a
-                  href={reposData.html_url}
+                  href={reposData?.html_url}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-blue-500 hover:underline"

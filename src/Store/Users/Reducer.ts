@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseUrl: "https://api.github.com/",
     headers: {
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     },
   }),
 
@@ -13,8 +13,16 @@ export const userApi = createApi({
 
   endpoints: (builder) => ({
     getUsers: builder.query({
-      query: ({ user, count, page }) =>
-        `/search/users?q=${user}&per_page=${count || 10}&page=${page || 1}`,
+      query: ({ user, page }) => {
+        return {
+          url: `/search/users?q=${user}`,
+
+          params: {
+            page: page || 0, // Page number
+            per_page: 10, // Number of results per page (max: 100)
+          },
+        };
+      },
       providesTags: ["User"],
     }),
     getPerticulerUser: builder.query({

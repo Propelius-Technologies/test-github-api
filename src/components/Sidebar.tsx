@@ -2,7 +2,6 @@ import { assets } from "@/Assets";
 import Image from "next/image";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
-// import { as Code } from "../Assets/Svgs/code.svg"
 const data = [
   {
     icon: assets.svg.CODE,
@@ -14,15 +13,16 @@ const data = [
     name: "Users",
   },
 ];
-export const Sidebar = ({ setTab, tab }: any) => {
+export const Sidebar = ({ setTab, tab, setPage }: any) => {
   const router = useRouter();
 
   const handleclick = (name: any) => {
     router.push("/");
+
+    if (setPage) setPage(1);
     if (setTab) setTab(name);
   };
 
-  console.log(tab);
   return (
     <div className="w-full bg-white h-full">
       <h2 className="px-4 pt-4 pb-2 text-black">Filter By</h2>
