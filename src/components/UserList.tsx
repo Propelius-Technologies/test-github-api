@@ -1,41 +1,23 @@
-import { Inter } from "next/font/google";
-import { RootState } from "@/Store";
-import { useSelector } from "react-redux";
-import Navbar from "@/components/Navbar";
-import { Sidebar } from "@/components/Sidebar";
-import { Dropdown } from "flowbite-react";
 import { useGetUsersQuery } from "@/Store/Users/Reducer";
-import ContentWrapper from "@/components/ContentWrapper";
-import User from "@/components/user";
-import { useState, useDeferredValue } from "react";
-import UserList from "@/components/UserList";
-import Repository from "@/components/repository";
+import React, { useEffect } from "react";
+import User from "./user";
+import Pagination from "./Pagination";
 
-const inter = Inter({ subsets: ["latin"] });
+const UserList = ({ value, setDataCount }: any) => {
+  const {
+    data: userData = {},
+    error,
+    isLoading,
+    isFetching,
+    refetch,
+  } = useGetUsersQuery({ user: value });
+  useEffect(() => {
+    setDataCount(userData?.total_count);
+  }, [userData]);
 
-export default function Home() {
-  const [searchText, setSearchtext] = useState("");
-  const [tab, setTab] = useState("Users");
-  const [dataCount, setDataCount] = useState(0);
-  const value = useDeferredValue(searchText);
-  const store = useSelector((state: RootState) => state);
-  // const {
-  //   data: userData = [],
-  //   error,
-  //   isLoading,
-  //   isFetching,
-  //   refetch,
-  // } = useGetUsersQuery({ user: value });
   return (
-    <ContentWrapper
-      setSearchtext={setSearchtext}
-      withDropdown
-      className={"text-black"}
-      count={dataCount}
-      setTab={setTab}
-      tab={tab}
-    >
-      {/* {isLoading ? (
+    <>
+      {isLoading ? (
         <div
           role="status"
           className=" w-full mt-3 p-4 space-y-4 border border-gray-200 divide-y divide-gray-200 rounded shadow animate-pulse dark:divide-gray-700 md:p-6 dark:border-gray-700"
@@ -66,15 +48,16 @@ export default function Home() {
           No Data{" "}
         </div>
       ) : (
-        userData?.items?.slice(0, 10)?.map((user: any) => {
-          return <User key={user.id} {...user} />;
-        })
-      )} */}
-      {tab === "Users" ? (
-        <UserList value={value} setDataCount={setDataCount} />
-      ) : (
-        <Repository value={value} setDataCount={setDataCount} />
+        <>
+          {userData?.items?.slice(0, 10)?.map((user: any) => {
+            return <User key={user.id} {...user} />;
+          })}
+
+          {/* <Pagination total={userData?.total_count || 0} /> */}
+        </>
       )}
-    </ContentWrapper>
+    </>
   );
-}
+};
+
+export default UserList;
