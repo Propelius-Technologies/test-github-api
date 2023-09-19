@@ -14,4 +14,3 @@ GitHub Repository Explorer allows the user to explore through different account 
 ![App Screenshot](https://i.postimg.cc/MTQLwbzD/Screenshot-2023-09-19-190130.png)
 ![App Screenshot](https://i.postimg.cc/c4nLzVqg/Screenshot-2023-09-19-190102.png)
 ![App Screenshot](https://i.postimg.cc/qqng2Y43/Screenshot-2023-09-19-190033.png)
-![App Screenshot](https://i.postimg.cc/8zCNS39m/Screenshot-2023-09-19-185953.png)
