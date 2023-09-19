@@ -21,7 +21,7 @@ const RepositoryDetails = () => {
         <div className="max-w-3xl mx-auto">
           <h1 className="text-2xl font-semibold mb-4">Repository Detail</h1>
           <div className="bg-white rounded shadow p-4">
-            <div className="flex flex-row gap-5">
+            <div className="flex flex-col md:flex-row gap-5">
               <Image
                 src={reposData?.owner.avatar_url}
                 alt="Alternate text"

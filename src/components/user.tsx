@@ -10,9 +10,7 @@ const User = ({ url }: any) => {
   const userName = url.split("/").pop();
   const {
     data: user = {},
-    error,
     isLoading,
-    isFetching,
     refetch,
   } = useGetPerticulerUserQuery({ user: userName });
 
@@ -70,13 +68,13 @@ const User = ({ url }: any) => {
                   {user?.bio === "undefined" ? "" : user.bio}
                 </p>
 
-                <div className="flex">
+                <div className="flex items-center flex-wrap">
                   {!user?.location || user?.location === "undefined" ? (
                     ""
                   ) : (
                     <>
                       <div className="mr-2">
-                        <p className="text-sx md:text-base lg:text-base mb-2 text-gray-500 whitespace-normal">
+                        <p className="text-sx md:text-base lg:text-base text-gray-500 whitespace-normal">
                           {user?.location === "undefined" ? "" : user.location}
                         </p>
                       </div>
@@ -116,7 +114,6 @@ const User = ({ url }: any) => {
                   </div>
                 </div>
               </div>
-             
             </div>
           </div>
         </div>

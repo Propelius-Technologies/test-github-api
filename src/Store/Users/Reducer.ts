@@ -5,7 +5,7 @@ export const userApi = createApi({
     baseUrl: "https://api.github.com/",
     headers: {
       Authorization:
-        "Bearer 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",
+        "Bearer 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",
     },
   }),
 

@@ -26,7 +26,7 @@ export const Sidebar = ({ setTab, tab, setPage }: any) => {
   return (
     <div className="w-full bg-white h-full">
       <h2 className="px-4 pt-4 pb-2 text-black">Filter By</h2>
-      <div className=" flex md:flex-col flex-row px-2 pt-1">
+      <div className=" flex md:flex-col flex-row px-2 pt-1 my-3">
         {data.map(({ icon, name }) => {
           return (
             <div

@@ -7,6 +7,7 @@ import star from "../../src/assets/image/star-png-icon-0.jpg";
 import { useGetRepositoriesQuery } from "@/Store/Repositories/Reducer";
 import Link from "next/link";
 import Pagination from "./Pagination";
+import { format } from "date-fns";
 
 const Repository = ({ value, setDataCount, page, setPage }: any) => {
   const { data: repoData = [], isLoading } = useGetRepositoriesQuery({
@@ -16,7 +17,8 @@ const Repository = ({ value, setDataCount, page, setPage }: any) => {
   useEffect(() => {
     setDataCount(repoData?.total_count);
   }, [repoData]);
-  return (
+
+return (
     <>
       {isLoading ? (
         <div
@@ -52,7 +54,7 @@ const Repository = ({ value, setDataCount, page, setPage }: any) => {
               key={item.id}
             >
               <div className="flow-root">
-                <div className="flex items-start space-x-4">
+                <div className="flex flex-col items-start space-x-4">
                   <div className="flex-1 min-w-0">
                     <div className="flex mb-3">
                       <div className="flex-shrink-0 h-8 w-8 mr-3 items-center border border-gray-400 rounded-md">
@@ -65,74 +67,65 @@ const Repository = ({ value, setDataCount, page, setPage }: any) => {
                           style={{ objectFit: "fill" }}
                         />
                       </div>
+                      <div>
                       <Link href={`/${item?.owner?.login}/${item.name}`}>
                         <p
-                          className="text-base md:text-lg lg:text-lg mb-2 whitespace-normal overflow-hidden"
+                          className="text-base md:text-lg lg:text-lg mb-2 whitespace-normal flex flex-wrap"
                           style={{ color: "rgb(9, 105, 218)" }}
                         >
                           {item.full_name}
                         </p>
+                        <p className="text-sm md:text-base lg:text-base mb-2 ml-0 text-black-500 whitespace-normal">
+                          {item.description}
+                        </p>
                       </Link>
+                      <div className="flex flex-wrap">
+                    <div className="mr-2 flex items-center">
+                      <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2 "></div>
+                      <p className="text-sx md:text-base lg:text-base text-gray-500 whitespace-normal">
+                        {item.language}
+                      </p>
                     </div>
-                    <p className="text-sm md:text-base lg:text-base mb-2 text-black-500 whitespace-normal">
-                      Neil Sims erdskfhd wdjs,
-                    </p>
-
-                    <div className="flex">
-                      <div className="mr-2 flex">
-                        <div className="w-3 h-3 bg-yellow-500 rounded-full mr-2 mt-2"></div>
-                        <p className="text-sx md:text-base lg:text-base mb-2 text-gray-500 whitespace-normal">
-                          {item.language}
-                        </p>
-                      </div>
-                      <div className="mr-3"> &nbsp;{`\u00b7`}</div>
-                      <div className="flex items-center mr-2 text-xs text-gray-500">
-                        <Image
-                          src={star}
-                          alt="Star icon"
-                          style={{
-                            width: "auto",
-                            height: "16px",
-                            marginRight: "8px",
-                            marginBottom: "4px",
-                          }}
-                        />
-                        <p className="text-xs md:text-base lg:text-base mb-2 text-gray-500 whitespace-normal">
-                          {item.stargazers_count}
-                        </p>
-                      </div>
-                      <div className="mx-2"> &nbsp;{`\u00b7`}</div>
-                      <div className="flex items-center mr-2 text-xs text-gray-500 dark:text-gray-400">
-                        <Image
-                          src={followers}
-                          style={{
-                            backgroundColor: "none",
-                            height: "20px",
-                            width: "auto",
-                            color: "grey",
-                            marginRight: "4px",
-                            marginBottom: "4px",
-                          }}
-                          alt="Repository icon"
-                        />
-                        <p className="text-xs md:text-base lg:text-base mb-2 text-gray-500 whitespace-normal">
-                          Updated on {item.updated_at}
-                        </p>
-                      </div>
+                    <div className="mr-3 my-2"> &nbsp;{`\u00b7`}</div>
+                    <div className="flex items-center mr-2 text-xs text-gray-500">
+                      <Image
+                        src={star}
+                        alt="Star icon"
+                        style={{
+                          width: "auto",
+                          height: "16px",
+                          marginRight: "8px",
+                          // marginBottom: "4px",
+                        }}
+                      />
+                      <p className="text-xs md:text-base lg:text-base text-gray-500 whitespace-normal">
+                        {item.stargazers_count}
+                      </p>
+                    </div>
+                    <div className="mx-2 my-2"> &nbsp;{`\u00b7`}</div>
+                    <div className="flex items-center mr-2 text-xs text-gray-500 dark:text-gray-400">
+                      <Image
+                        src={followers}
+                        style={{
+                          backgroundColor: "none",
+                          height: "20px",
+                          width: "auto",
+                          color: "grey",
+                          marginRight: "4px",
+                          // marginBottom: "4px",
+                        }}
+                        alt="Repository icon"
+                      />
+                      <p className="text-xs md:text-base lg:text-base text-gray-500 whitespace-normal">
+                        Updated on {format(new Date(item.updated_at), "dd MMM")}
+                      </p>
                     </div>
                   </div>
-                  <button className=" flex items-center bg-rgb(246, 248, 250)-500 hover:bg-grey text-rgb(36, 41, 47) font-semibold py-2 px-4 border border-rgba(31, 35, 40, 0.15) rounded-md">
-                    <Image
-                      src={star}
-                      alt="Star icon"
-                      style={{
-                        width: "20px",
-                        height: "20px",
-                        marginRight: "8px",
-                      }}
-                    />
-                    Star
-                  </button>
+                      </div>
+                     </div>
+                  </div>
+
+                  
                 </div>
               </div>
             </div>
